@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import TfidfTransformer, TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from joblib import dump
@@ -12,7 +12,10 @@ y_data = dataset.iloc[:, 0]
 
 from sklearn.pipeline import Pipeline
 
-text_clf = Pipeline([('vect', CountVectorizer()),('tfidf', TfidfTransformer()),('clf', MultinomialNB())])
+#text_clf = Pipeline([('vect', CountVectorizer()),('tfidf', TfidfTransformer()),('clf', MultinomialNB())])
+
+text_clf = Pipeline([('vect', TfidfVectorizer()),('clf', MultinomialNB())])
+
 
 text_clf = text_clf.fit(x_target, y_data)
 
